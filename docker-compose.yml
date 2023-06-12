@@ -1,0 +1,86 @@
+version: "3.8"
+services:
+    # imagem 
+    api_rest_ful:
+        build: 
+            args: 
+                user: elessandro
+                uid: 1000
+            context: ./
+            dockerfile: Dockerfile
+        image: laravel-app
+        restart: unless-stopped
+        working_dir: /var/www/
+        volumes:
+            - ./:/var/www
+        depends_on: 
+            - redis
+            - queue
+        networks: 
+            - api
+    
+    # nginx apiRestful
+    nginx:
+        image: nginx:alpine
+        restart: unless-stopped
+        ports: 
+            - 8000:80
+        volumes: 
+            - ./:/var/www
+            - ./docker/nginx/:/etc/nginx/conf.d/
+        networks: 
+            - api
+
+    # mysql apiRestful
+    db:
+        image: mysql:5.7.22
+        restart: unless-stopped
+        environment: 
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+            MYSQL_USER: ${DB_USERNAME}
+        volumes: 
+            - ./.docker/mysql/dbdata:/var/lib/mysql
+        ports: 
+            - 3308:3306
+        networks: 
+            - api
+
+    # sgdb apiRestful
+    adminer:
+        image: adminer
+        restart: unless-stopped
+        ports:
+            - 8080:8080
+        depends_on: 
+            - db
+        networks: 
+            - api
+
+    # queue apiRestful
+    queue:
+        build: 
+            args: 
+                user: elessandro
+                uid: 1000
+            context: ./
+            dockerfile: Dockerfile
+        restart: unless-stopped
+        command: "php artisan queue:work"
+        volumes: 
+            - ./:/var/www
+        depends_on: 
+            - redis
+        networks: 
+            - api
+
+    #redis
+    redis:
+        image: redis:latest
+        networks: 
+            - api
+
+networks: 
+    api:
+        driver: bridge
