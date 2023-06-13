@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Cast;
 use App\Models\Film;
+use App\Observers\CastObserver;
 use App\Observers\FilmObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -28,6 +30,7 @@ class EventServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Film::observe(FilmObserver::class);
+        Cast::observe(CastObserver::class);
     }
 
     /**

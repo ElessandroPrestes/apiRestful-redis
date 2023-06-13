@@ -24,21 +24,21 @@ class FilmRepository
         return $this->entity->create($data);
     }
 
-    public function getFilmByUuid(string $id)
+    public function getFilmByUuid(string $uuid)
     {
-        return $this->entity->where('uuid', $id)->firstOrfail();
+        return $this->entity->where('uuid', $uuid)->firstOrfail();
     }
 
-    public function deleteFIlmByUuid(string $id)
+    public function deleteFIlmByUuid(string $uuid)
     {
-        $film = $this->getFilmByUuid($id, false);
+        $film = $this->getFilmByUuid($uuid, false);
 
         return $film->delete();
     }
 
-    public function updateFilmByUuid(string $id, array $data)
+    public function updateFilmByUuid(string $uuid, array $data)
     {
-        $film = $this->getFilmByUuid($id);
+        $film = $this->getFilmByUuid($uuid);
 
         return $film->update($data);
     }

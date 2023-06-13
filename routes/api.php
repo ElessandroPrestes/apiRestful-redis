@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\CastController;
 use App\Http\Controllers\Api\FilmController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -14,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+Route::apiResource('/films/{film}/casts', CastController::class);
+
 Route::put('/films/{film}', [FilmController::class, 'update']);
 Route::delete('/films/{id}', [FilmController::class, 'destroy']);
 Route::get('/films/{id}', [FilmController::class, 'show']);
