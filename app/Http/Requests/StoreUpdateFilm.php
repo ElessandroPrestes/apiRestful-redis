@@ -25,15 +25,9 @@ class StoreUpdateFilm extends FormRequest
 
         return [
             'title' => "required|string|min:2|max:100|unique:films,title,{$uuid},uuid",
-            'synopsis' => "required|min:2|max:200,{$uuid},uuid",
+            'synopsis' => 'required|min:2|max:200',
             'image' => 'nullable|image|max:1024',
         ];
-
-        if ($this->method() == 'PUT') {
-            $rules['image'] = ['nullable', 'image', 'max:1024'];
-        }
-
-        return $rules;
     }
 }
 

@@ -23,18 +23,18 @@ class FilmService
         return $this->repository->createNewFilm($data);
     }
 
-    public function getFilm(string $identify)
+    public function getFilm(string $id)
     {
-        return $this->repository->getFilmByUuid($identify);
+        return $this->repository->getFilmByUuid($id);
     }
 
-    public function deleteFilm(string $identify)
+    public function deleteFilm(string $id)
     {
-        return $this->repository->deleteFilmByUuid($identify);
+        return $this->repository->deleteFilmByUuid($id);
     }
 
-    public function updateFilm(string $identify, array $data)
+    public function updateFilm(string $id, array $data)
     {
-        return $this->repository->updateFilmByUuid($identify, $data);
+        return $this->repository->updateFilmByUuid($id, $data);
     }
 }

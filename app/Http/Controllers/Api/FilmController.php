@@ -22,7 +22,12 @@ class FilmController extends Controller
      */
     public function index()
     {
-        //
+        $films = $this->filmService->getFilms();
+
+        return response([
+            'data' => FilmResource::collection($films),
+            'message' => 'Films Successfully listed'
+        ], 200);
     }
 
     /**
@@ -40,28 +45,36 @@ class FilmController extends Controller
 
     /**
      * Display the specified resource.
-     * @param string $identify
+     * @param string $id
      */
-    public function show($identify)
+    public function show($id)
     {
-        //
+        $film = $this->filmService->getFilm($id);
+
+        return response(['data'=>new FilmResource($film),
+         'message' => 'Film successfully listed'
+        ], 200);
     }
 
     /**
      * Update the specified resource in storage.
-     *  @param  string  $identify
+     *  @param  string  $id
      */
-    public function update(StoreUpdateFilm $request, $identify)
+    public function update(StoreUpdateFilm $request, $id)
     {
-        //
+        $this->filmService->updateFilm($id, $request->validated());
+
+        return response()->json(['message' => 'Updated'], 204);
     }
 
     /**
      * Remove the specified resource from storage.
-     * @param  string  $identify
+     * @param  string  $id
      */
-    public function destroy($identify)
+    public function destroy($id)
     {
-        //
+        $this->filmService->deleteFilm($id);
+
+        return response()->json(['message' => 'Deleted'], 204);
     }
 }

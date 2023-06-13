@@ -16,12 +16,7 @@ class FilmRepository
 
     public function getAllFilms()
     {
-        
-        return Cache::rememberForever('films', function () {
-            return $this->entity
-                        ->with('modules.lessons')
-                        ->get();
-        });
+        return $this->entity->get();
     }
 
     public function createNewFilm(array $data)
@@ -29,30 +24,21 @@ class FilmRepository
         return $this->entity->create($data);
     }
 
-    public function getFilmByUuid(string $identify, bool $loadRelationships = true)
+    public function getFilmByUuid(string $id)
     {
-        $query = $this->entity->where('uuid', $identify);
-
-        if ($loadRelationships)
-            $query->with('modules.lessons');
-
-        return $query->firstOrfail();
+        return $this->entity->where('uuid', $id)->firstOrfail();
     }
 
-    public function deleteFIlmByUuid(string $identify)
+    public function deleteFIlmByUuid(string $id)
     {
-        $film = $this->getFilmByUuid($identify, false);
-
-        Cache::forget('films');
+        $film = $this->getFilmByUuid($id, false);
 
         return $film->delete();
     }
 
-    public function updateFilmByUuid(string $identify, array $data)
+    public function updateFilmByUuid(string $id, array $data)
     {
-        $film = $this->getFilmByUuid($identify, false);
-
-        Cache::forget('films');
+        $film = $this->getFilmByUuid($id);
 
         return $film->update($data);
     }

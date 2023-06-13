@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-//Route::put('/films/{film}', [CourseController::class, 'update']);
-//Route::delete('/courses/{identify}', [CourseController::class, 'destroy']);
-Route::get('/courses/{identify}', [FilmController::class, 'show']);
+Route::put('/films/{film}', [FilmController::class, 'update']);
+Route::delete('/films/{id}', [FilmController::class, 'destroy']);
+Route::get('/films/{id}', [FilmController::class, 'show']);
 Route::post('/films', [FilmController::class, 'store']);
 Route::get('/films', [FilmController::class, 'index']);
 
