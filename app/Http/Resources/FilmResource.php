@@ -20,6 +20,7 @@ class FilmResource extends JsonResource
             'title'  => $this->title,
             'synopsis' =>$this->synopsis,
             'image' =>$this->image,
+            'casts' => CastResource::collection($this->whenLoaded('casts')),
             'created_at' =>$this->created_at->format('d-m-Y:i:s'),
             'updated_at' =>$this->updated_at->format('d-m-Y:i:s')
         ];

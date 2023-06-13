@@ -26,7 +26,7 @@ class FilmController extends Controller
 
         return response([
             'data' => FilmResource::collection($films),
-            'message' => 'Films Successfully listed'
+            'message' => 'Successfully listed'
         ], 200);
     }
 

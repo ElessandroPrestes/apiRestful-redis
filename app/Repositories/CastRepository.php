@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Cast;
+use Illuminate\Support\Facades\Cache;
 
 class CastRepository
 {
@@ -15,9 +16,7 @@ class CastRepository
 
     public function getCastFilm(int $filmId)
     {
-        return $this->entity
-                        ->where('film_id', $filmId)
-                        ->get();
+        return $this->entity->where('film_id', $filmId)->get();
     }
 
     public function createNewCast(int $filmId, array $data)
@@ -46,6 +45,8 @@ class CastRepository
     {
         $cast = $this->getCastByUuid($uuid);
 
+        Cache::forget('courses');
+
         $data['film_id'] = $filmId;
 
         return $cast->update($data);
@@ -53,7 +54,9 @@ class CastRepository
 
     public function deleteCastByUuid(string $uuid)
     {
-        $cast = $this->getCAstByUuid($uuid);
+        $cast = $this->getCastByUuid($uuid);
+
+        Cache::forget('courses');
 
         return $cast->delete();
     }
