@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Film extends Model
+class Cast extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title','synopsis','image'];
+    protected $fillable = ['name'];
 
-    public function casts()
+    public function film()
     {
-        return $this->hasMany(Cast::class);
+        return $this->belongsTo(Film::class);
     }
 }
