@@ -24,6 +24,3 @@ Route::post('/films', [FilmController::class, 'store']);
 Route::get('/films', [FilmController::class, 'index']);
 
 
-Route::get('/', function(){
-    return response()->json(['message' => 'API']);
-});

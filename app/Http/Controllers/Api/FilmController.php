@@ -64,7 +64,7 @@ class FilmController extends Controller
     {
         $this->filmService->updateFilm($id, $request->validated());
 
-        return response()->json(['message' => 'Updated'], 204);
+        return response()->json(['message' => 'Updated'], 200);
     }
 
     /**

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->foreignId('film_id')->constrained('films');
             $table->uuid('uuid');
-            $table->string('name');
+            $table->string('name')->unique();
             $table->timestamps();
         });
     }

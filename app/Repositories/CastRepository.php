@@ -45,7 +45,7 @@ class CastRepository
     {
         $cast = $this->getCastByUuid($uuid);
 
-        Cache::forget('courses');
+        Cache::forget('films');
 
         $data['film_id'] = $filmId;
 
@@ -56,7 +56,7 @@ class CastRepository
     {
         $cast = $this->getCastByUuid($uuid);
 
-        Cache::forget('courses');
+        Cache::forget('films');
 
         return $cast->delete();
     }

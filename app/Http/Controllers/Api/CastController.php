@@ -32,7 +32,7 @@ class CastController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreUpdateCast $request)
+    public function store(StoreUpdateCast $request, $film)
     {
         $cast = $this->castService->createNewCast($request->validated());
 
@@ -59,18 +59,18 @@ class CastController extends Controller
      * Update the specified resource in storage.
      * @param string $uuid
      */
-    public function update(StoreUpdateCast $request, $uuid)
+    public function update(StoreUpdateCast $request, $film, $uuid)
     {
         $this->castService->updateCast($uuid, $request->validated());
 
-        return response()->json(['message' => 'Updated']);
+        return response()->json(['message' => 'Updated'], 200);
     }
 
     /**
      * Remove the specified resource from storage.
      * @param string $uuid
      */
-    public function destroy($uuid)
+    public function destroy($film, $uuid)
     {
         $this->castService->deleteCast($uuid);
 
