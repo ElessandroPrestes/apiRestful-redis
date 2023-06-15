@@ -52,7 +52,6 @@ Aguarde a finalização.
 9. Execute as migrations :
     php artisan migrate
 
-Para sair do container, execute CTRL + D.
 ```
 
 <br>
@@ -61,12 +60,14 @@ Para sair do container, execute CTRL + D.
 
 <br>
 
-### ⌨️ Acesse seu terminal e execute os scripts abaixo:
+### ⌨️ Ainda no seu terminal, dentro do container app,  execute os scripts abaixo:
 
 ```
-1 . docker compose exec app bash
+OBS : Caso tenha saido do container, repita o passo 6 da instalação.
 
-2.  php artisan test
+1.  php artisan test
+
+2.  Para sair do container app, execute CTRL + D.
 ```
 
 <br>
