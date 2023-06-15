@@ -78,7 +78,8 @@ OBS : Caso tenha saido do container, repita o passo 6 da instalação.
 Adminer - Ferramenta de gerenciamento de banco de dados
 
     http://localhost:8080
-    user : root
+    servidor : mysql
+    user     : root
     password : root
     database : laravel-redis
 
