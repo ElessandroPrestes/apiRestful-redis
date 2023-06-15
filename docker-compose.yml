@@ -1,14 +1,15 @@
 version: "3.8"
 services:
     # imagem 
-    api_rest_ful:
+    app:
+        container_name: app
+        image: app
         build: 
             args: 
                 user: elessandro
                 uid: 1000
             context: ./
             dockerfile: Dockerfile
-        image: laravel-app
         restart: unless-stopped
         working_dir: /var/www/
         volumes:
@@ -19,8 +20,9 @@ services:
         networks: 
             - api
     
-    # nginx apiRestful
+    # nginx 
     nginx:
+        container_name: nginx
         image: nginx:alpine
         restart: unless-stopped
         ports: 
@@ -31,8 +33,9 @@ services:
         networks: 
             - api
 
-    # mysql apiRestful
-    db:
+    # mysql 
+    mysql:
+        container_name: db-mysql
         image: mysql:5.7.22
         restart: unless-stopped
         environment: 
@@ -47,19 +50,22 @@ services:
         networks: 
             - api
 
-    # sgdb apiRestful
+    # sgdb 
     adminer:
+        container_name: adminer
         image: adminer
         restart: unless-stopped
         ports:
             - 8080:8080
         depends_on: 
-            - db
+            - mysql
         networks: 
             - api
 
-    # queue apiRestful
+    # queue 
     queue:
+        container_name: queue
+        image: queue
         build: 
             args: 
                 user: elessandro
@@ -77,6 +83,7 @@ services:
 
     #redis
     redis:
+        container_name: redis
         image: redis:latest
         networks: 
             - api
