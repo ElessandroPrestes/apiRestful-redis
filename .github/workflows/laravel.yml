@@ -6,7 +6,7 @@ on:
  
 jobs:
   laravel-tests:
-
+    name: CI
     runs-on: ubuntu-latest
 
     steps:
